@@ -70,5 +70,5 @@ include $basePath . '/includes/header.php';
 
 <?php
 // Footer
-include $basePath . '/includes/footer.php';
+include $basePath . '/includes/footer.html';
 ?>
