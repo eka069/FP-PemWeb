@@ -19,7 +19,7 @@ if (!$foodItem) {
 }
 
 // Header
-include $basePath . '/includes/header.php';
+include $basePath . '/includes/header.html';
 ?>
 
 <!-- Konten Utama -->
