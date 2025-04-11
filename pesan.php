@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Header
-include $basePath . '/includes/header.php';
+include $basePath . '/includes/header.html';
 ?>
 
 <!-- Konten Utama -->
