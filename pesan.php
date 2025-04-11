@@ -208,5 +208,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <?php
 // Footer
-include $basePath . '/includes/footer.php';
+include $basePath . '/includes/footer.html';
 ?>
