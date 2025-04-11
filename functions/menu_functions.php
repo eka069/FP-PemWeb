@@ -24,28 +24,27 @@ function getAllFoodItems($conn) {
 function getFoodItemById(PDO $conn, $id) {
     $id = (int)$id;
 
-    $query = "SELECT f.*, 
-                     c.name AS category_name, 
-                     c.slug AS category_slug, 
-                     s.name AS seller_name 
-              FROM food_items f 
-              JOIN categories c ON f.category_id = c.id 
-              JOIN sellers s ON f.seller_id = s.id 
-              WHERE f.id = :id";
+    try {
+        $query = "SELECT f.*, 
+                         c.name AS category_name, 
+                         c.slug AS category_slug, 
+                         s.name AS seller_name 
+                  FROM food_items f 
+                  JOIN categories c ON f.category_id = c.id 
+                  JOIN sellers s ON f.seller_id = s.id 
+                  WHERE f.id = :id";
 
-    $stmt = $conn->prepare($query);
-    $stmt->execute(['id' => $id]);
+        $stmt = $conn->prepare($query);
+        $stmt->execute(['id' => $id]);
 
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+        return $stmt->fetch(PDO::FETCH_ASSOC);
 
-    
-    if ($result && mysqli_num_rows($result) > 0) {
-        return mysqli_fetch_assoc($result);
+    } catch (PDOException $e) {
+        echo "Query error: " . $e->getMessage();
+        return [];
     }
-    
-    return null;
 }
+
 
 // Fungsi untuk mengambil semua kategori
 function getAllCategories($conn) {
