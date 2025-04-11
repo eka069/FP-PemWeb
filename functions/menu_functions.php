@@ -21,14 +21,24 @@ function getAllFoodItems($conn) {
 }
 
 // Fungsi untuk mengambil detail menu makanan berdasarkan ID
-function getFoodItemById($conn, $id) {
+function getFoodItemById(PDO $conn, $id) {
     $id = (int)$id;
-    $query = "SELECT f.*, c.name AS category_name, c.slug AS category_slug, s.name AS seller_name 
+
+    $query = "SELECT f.*, 
+                     c.name AS category_name, 
+                     c.slug AS category_slug, 
+                     s.name AS seller_name 
               FROM food_items f 
               JOIN categories c ON f.category_id = c.id 
               JOIN sellers s ON f.seller_id = s.id 
-              WHERE f.id = $id";
-    $result = mysqli_query($conn, $query);
+              WHERE f.id = :id";
+
+    $stmt = $conn->prepare($query);
+    $stmt->execute(['id' => $id]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
     
     if ($result && mysqli_num_rows($result) > 0) {
         return mysqli_fetch_assoc($result);
