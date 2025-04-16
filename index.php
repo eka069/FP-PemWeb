@@ -3,10 +3,9 @@
 $basePath = __DIR__; // Mendapatkan path absolut dari direktori saat ini
 
 // Koneksi ke database
-require_once 'config/database.php';
-require_once 'functions/menu_functions.php';
-
-$menuItems = getAllFoodItems($conn); // $conn adalah objek PDO
+require_once $basePath . '/config/database.php';
+require_once $basePath . '/functions/menu_functions.php';
+require_once $basePath . '/functions/image_functions.php'; // Tambahkan ini
 
 // Ambil semua menu makanan
 $foodItems = getAllFoodItems($conn);
@@ -15,7 +14,7 @@ $foodItems = getAllFoodItems($conn);
 $categories = getAllCategories($conn);
 
 // Header
-include $basePath . '/includes/header.html';
+include $basePath . '/includes/header.php';
 ?>
 
 <!-- Konten Utama -->
@@ -55,8 +54,9 @@ include $basePath . '/includes/header.html';
     <?php foreach ($foodItems as $item): ?>
       <div class="food-item border rounded-lg overflow-hidden" data-category="<?= htmlspecialchars($item['category_slug']) ?>">
         <div class="relative h-48 w-full">
-          <img src="<?= htmlspecialchars($item['image'] ?: 'assets/images/placeholder.jpg') ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="w-full h-full object-cover">
-          <span class="absolute top-2 right-2 bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full"><?= htmlspecialchars($item['category_name']) ?></span>
+          <img src="<?= htmlspecialchars($item['image'] ? $item['image'] : getPlaceholderUrl(300, 200)) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="w-full h-full object-cover">
+          <span class="absolute top-2 right-2 bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full"><?= htmlspecialchars($item['category_name']) ?>
+        </span>
         </div>
         <div class="p-4">
           <h3 class="font-semibold text-lg mb-1"><?= htmlspecialchars($item['name']) ?></h3>
