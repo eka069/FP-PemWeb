@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>FAST KANTIN - Pesan Makanan Kantin dengan Cepat</title>
+   <meta name="description" content="Aplikasi pemesanan makanan kantin untuk kampus">
+   
+   <!-- Tailwind CSS -->
+   <script src="https://cdn.tailwindcss.com"></script>
+   
+   <!-- Font -->
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+   
+   <style>
+       body {
+           font-family: 'Inter', sans-serif;
+       }
+       
+       /* Animasi untuk cart dropdown */
+       .cart-dropdown {
+           transition: all 0.3s ease;
+           transform-origin: top right;
+           transform: scale(0.95);
+           opacity: 0;
+           visibility: hidden;
+       }
+       
+       .cart-dropdown.active {
+           transform: scale(1);
+           opacity: 1;
+           visibility: visible;
+       }
+       
+       /* Overlay untuk cart */
+       .cart-overlay {
+           background-color: rgba(0, 0, 0, 0.5);
+           transition: opacity 0.3s ease;
+           opacity: 0;
+           visibility: hidden;
+       }
+       
+       .cart-overlay.active {
+           opacity: 1;
+           visibility: visible;
+       }
+   </style>
+</head>
+<body class="bg-gray-50">
